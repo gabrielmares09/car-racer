@@ -31,13 +31,13 @@ class Game {
 
     car1 = createSprite(width / 2 - 50, height - 100);
     car1.addImage("carro1", car1_img);
-    car1.addImage("destruido", blastImg);
     car1.scale = 0.07;
+    car1.addImage("destruido", blastImg);
 
     car2 = createSprite(width / 2 + 100, height - 100);
     car2.addImage("carro2", car2_img);
-    car2.addImage("destruido", blastImg);
     car2.scale = 0.07;
+    car2.addImage("destruido", blastImg);
 
     cars = [car1, car2];
     
@@ -148,9 +148,12 @@ class Game {
         //use os dados do banco de dados para exibir os carros nas direções x e y
         var x = allPlayers[plr].positionX;
         var y = height - allPlayers[plr].positionY;
+       
         var currentLife = allPlayers[plr].life
-        if (currentLife < 0){
+        
+        if (currentLife <= 0){
           cars[index - 1].changeImage("destruido")
+          car[index -1].scale = 0.3
         }
         cars[index - 1].position.x = x;
         cars[index - 1].position.y = y;
@@ -262,13 +265,13 @@ handleObstacleColission(index){
     } else {
       player.positionX -= 100;
     }
+    
     if(player.life > 0){
       player.life -= 185/4;
     }
    
     //this.gameOver()
-   
-  
+    
     player.update()
   }
 }
